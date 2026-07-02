@@ -323,13 +323,13 @@ public class AntDodo extends ModelTask {
                     String taskTitle = bizInfo.getString("taskTitle");
                     if (TaskStatus.FINISHED.name().equals(taskStatus)) {
                         receiveTaskAward(sceneCode, taskType, taskTitle);
+                        continue;
                     }
                     if (TaskStatus.TODO.name().equals(taskStatus)) {
-                        if (!finishTask(sceneCode, taskType, taskTitle)) {
-                            continue;
+                        if (finishTask(sceneCode, taskType, taskTitle)) {
+                            receiveTaskAward(sceneCode, taskType, taskTitle);
                         }
                     }
-                    receiveTaskAward(sceneCode, taskType, taskTitle);
                 }
             }
         } catch (Throwable t) {
